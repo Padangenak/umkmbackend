@@ -182,6 +182,7 @@ function upload() {
 		image.value = [...val.data.attachment]
 		imgPending.value = false
 	});
+	formData = new FormData()
 }
 function imageDelete(e){
 	axios.post(route("imageDelete", [id.value, variantId.value]), {
