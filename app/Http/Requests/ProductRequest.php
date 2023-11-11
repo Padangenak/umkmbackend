@@ -27,7 +27,7 @@ class ProductRequest extends FormRequest
     {
         return [
             'product'=>'required',
-            'type'=>'required',
+            'category'=>'required',
             'price'=>'required|numeric',
             'discon'=>'required|numeric|min:0|max:100',
             'description'=>'required|string',
@@ -44,7 +44,7 @@ class ProductRequest extends FormRequest
             'price'=>$this->validated()['price'],
             'discon'=>$this->validated()['discon'],
             'description'=>$this->validated()['description'],
-            'type'=>$this->validated()['type']['name'],
+            'category_id'=>$this->validated()['category']['id'],
             'active'=>'On',
             'user_id'=>$user,
         ]);

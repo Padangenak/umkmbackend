@@ -9,9 +9,12 @@ use Illuminate\Database\Eloquent\Concerns\HasUlids;
 class Product extends Model
 {
     use HasFactory, HasUlids;
-    protected $fillable = ['product', 'type', 'price', 'user_id','discon', 'description', 'active', 'count'];
+    protected $fillable = ['product', 'type', 'price', 'user_id','discon', 'description', 'active', 'count', 'category_id'];
     public function variant(){
         return $this->hasMany(Variant::class, 'product_id');
+    }
+    public function category(){
+        return $this->belongsTo(category::class);
     }
     public function attachment(){
         return $this->hasOne(Product_attachment::class, 'product_id');

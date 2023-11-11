@@ -11,6 +11,7 @@ use App\Models\Variant_attachment;
 use App\Models\User_attachment;
 use App\Models\Product_attachment;
 use App\Models\Variant;
+use App\Models\Category;
 use Illuminate\Support\Facades\Hash;
 
 class DatabaseSeeder extends Seeder
@@ -50,6 +51,14 @@ class DatabaseSeeder extends Seeder
             'id'=>2,
             'role'=>'trader',
         ]);
-        
+        Category::create([
+            'category'=>'Fashion',
+        ]);
+        Category::create([
+            'category'=>'Makanan',
+        ]);
+        Category::create([
+            'category'=>'Busana',
+        ]);
     }
 }

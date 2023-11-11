@@ -108,10 +108,10 @@
 						<p>Tipe</p>
 						<div class="card flex justify-content-center">
 							<Dropdown
-								v-model="form.type"
-								:options="type"
-								optionLabel="name"
-								optionValue="name"
+								v-model="form.category"
+								:options="props.categories"
+								optionLabel="category"
+								optionValue="id"
 								placeholder="Pilih Tipe"
 								class="md:w-3/12 md:w-14rem"
 							/>
@@ -312,6 +312,7 @@ const props = defineProps({
 	product: Object,
 	ziggy: Object,
 	auth: Object,
+	categories: Object,
 });
 
 let id = ref(props.ziggy.location.split("/")[4]);
@@ -329,7 +330,7 @@ const form = useForm({
 	discon: props.product.discon,
 	stock: props.product.stock,
 	description: props.product.description,
-	type: props.product.type,
+	category: props.product.category_id,
 	attachment: null,
 	active: props.product.active,
 });

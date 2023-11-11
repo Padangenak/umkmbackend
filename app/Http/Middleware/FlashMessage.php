@@ -19,7 +19,8 @@ class FlashMessage extends Middleware
          return array_merge(parent::share($request), [
             'flash' => [
                 'err' => session('err'),
-                'message' => session('message')
+                'message' => session('message'),
+                'data' => session('data')
             ],
         ]);
     }

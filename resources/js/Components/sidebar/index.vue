@@ -160,6 +160,14 @@
 											<p>Tambah Produk</p>
 										</div>
 									</Link>
+									<Link :href="route('productCategory')" v-if="props.auth.user.role_id == 1">
+										<div
+											class="px-10 py-4 hover:bg-purple-400 flex"
+										>
+											<BoxMultiple class="w-5 mr-3" />
+											<p>Kategori Produk</p>
+										</div>
+									</Link>
 								</div>
 								<div
 									class="md:hidden fixed bg-purple-500 z-[50] transition"
@@ -180,6 +188,15 @@
 											<p>Tambah Produk</p>
 										</div>
 									</Link>
+
+									<Link :href="route('productCategory')" v-if="props.auth.user.role_id == 1">
+										<div
+											class="px-10 py-4 hover:bg-purple-400 flex"
+										>
+											<BoxMultiple class="w-5 mr-3" />
+											<p>Kategori Produk</p>
+										</div>
+									</Link>
 								</div>
 							</div>
 						</transition>
@@ -191,9 +208,8 @@
 </template>
 <script type="text/javascript" setup>
 import { ref, watch } from "vue";
-import { Dashboard, CaretSortDown, CaretSortUp } from "@vicons/carbon";
+import { Dashboard, CaretSortDown, CaretSortUp, Close } from "@vicons/carbon";
 import { ChevronDown, Menu2 } from "@vicons/tabler";
-import { CloseOutlined } from "@vicons/material";
 // import { Link, router } from "@inertiajs/inertia-vue3";
 import { Link, router, useForm } from "@inertiajs/vue3";
 import {

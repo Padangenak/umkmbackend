@@ -32,9 +32,9 @@
 						<p>Tipe</p>
 						<div class="card flex justify-content-center indexbottom">
 							<Dropdown
-								v-model="form.type"
-								:options="type"
-								optionLabel="name"
+								v-model="form.category"
+								:options="props.categories"
+								optionLabel="category"
 								placeholder="Pilih Tipe"
 								class="md:w-3/12 md:w-14rem indexbottom" 
 							/>
@@ -140,7 +140,8 @@ const type = ref([
 ]);
 
 const props = defineProps({
-	auth: Object
+	auth: Object,
+	categories: Object
 })
 
 const form = useForm({
@@ -149,7 +150,7 @@ const form = useForm({
 	discon: null,
 	stock: "Tersedia",
 	description: null,
-	type: null,
+	category: null,
 	attachment: null,
 });
 let imageURL = ref("");

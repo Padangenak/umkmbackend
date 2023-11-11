@@ -9,10 +9,18 @@
 			class="w-full py-2 flex items-center max-md:flex-row justify-between px-10 fixed bg-purple-500 text-white shadow z-[1]"
 		>
 			<div class="md:hidden flex gap-10 max-md:basis-1/3 cursor-pointer">
-					<Transition name="fade">
-				<Menu2 class="w-5" @click="sidebar = !sidebar" v-if="sidebar == false" />
-					<CloseOutlined class="w-5 cursor-pointer" @click="sidebar = !sidebar" v-else />
-					</Transition>
+				<Transition name="fade">
+					<Menu2
+						class="w-5"
+						@click="sidebar = !sidebar"
+						v-if="sidebar == false"
+					/>
+					<Close
+						class="w-5 cursor-pointer"
+						@click="sidebar = !sidebar"
+						v-else
+					/>
+				</Transition>
 			</div>
 			<p
 				class="py-2 text-xl font-black text-white md:hidden max-md:basis-1/3 select-none text-center"
@@ -35,11 +43,13 @@
 					<CaretSortDown class="w-4 block" />
 				</div>
 				<div
-					class="fixed bg-purple-500 md:rounded max-md:rounded-bl mt-2 select-none max-md:right-0 "
+					class="fixed bg-purple-500 md:rounded max-md:rounded-bl mt-2 select-none max-md:right-0"
 					v-if="profile"
 				>
 					<Link :href="route('im')">
-						<p class="py-2 px-4 hover:bg-purple-400 cursor-pointer text-left">
+						<p
+							class="py-2 px-4 hover:bg-purple-400 cursor-pointer text-left"
+						>
 							Tentang Saya
 						</p>
 					</Link>
@@ -54,7 +64,7 @@
 			</div>
 		</div>
 		<div class="md:w-2/12 select-none z-50" v-if="sidebar">
-			<div :class="{ 'px-6':sidebar }"></div>
+			<div :class="{ 'px-6': sidebar }"></div>
 			<div
 				class="md:w-2/12 max-md:w-fit h-screen fixed bg-purple-500 text-white shadow font-semibold"
 			>
@@ -164,6 +174,14 @@
 											<p>Tambah Produk</p>
 										</div>
 									</Link>
+									<Link :href="route('productCategory')" v-if="props.auth.user.role_id == 1">
+										<div
+											class="px-10 py-4 hover:bg-purple-400 flex"
+										>
+											<BoxMultiple class="w-5 mr-3" />
+											<p>Kategori Produk</p>
+										</div>
+									</Link>
 								</div>
 								<div
 									class="md:hidden fixed bg-purple-500 z-[50] transition"
@@ -184,6 +202,14 @@
 											<p>Tambah Produk</p>
 										</div>
 									</Link>
+									<Link :href="route('productCategory')" v-if="props.auth.user.role_id == 1">
+										<div
+											class="px-10 py-4 hover:bg-purple-400 flex"
+										>
+											<BoxMultiple class="w-5 mr-3" />
+											<p>Kategori Produk</p>
+										</div>
+									</Link>
 								</div>
 							</div>
 						</transition>
@@ -195,9 +221,8 @@
 </template>
 <script type="text/javascript" setup>
 import { ref, watch } from "vue";
-import { Dashboard, CaretSortDown, CaretSortUp } from "@vicons/carbon";
+import { Dashboard, CaretSortDown, CaretSortUp, Close } from "@vicons/carbon";
 import { ChevronDown, Menu2 } from "@vicons/tabler";
-import { CloseOutlined } from "@vicons/material";
 // import { Link, router } from "@inertiajs/inertia-vue3";
 import { Link, router, useForm } from "@inertiajs/vue3";
 import {

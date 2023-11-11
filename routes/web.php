@@ -3,6 +3,7 @@
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\User\UserController;
 use App\Http\Controllers\Product\ProductController;
+use App\Http\Controllers\Product\CategoryController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -52,6 +53,12 @@ Route::middleware('auth')->group(function () {
             Route::post('/attachmentproduct/{variantId}/loading', [ProductController::class,'attachmentUpload'])->name('attachmentUpload');
             Route::post('/attachmentproduct/{variantId}/delete/loading', [ProductController::class,'imageDelete'])->name('imageDelete');
             Route::post('/newVariant/loading', [ProductController::class,'newVariant'])->name('newVariant');
+        });
+        Route::group(['prefix'=>'category', 'middleware'=>'userblock'], function(){
+            Route::post('/add', [CategoryController::class,'add'])->name('productCategoryAdd');
+            Route::post('/edit/{id}', [CategoryController::class,'edit'])->name('productCategoryEdit');
+            Route::post('/delete/{id}', [CategoryController::class,'delete'])->name('productCategoryDelete');
+            Route::get('/', [CategoryController::class,'index'])->middleware('flash')->name('productCategory');
         });
 
         // Route::post('add/{id}/attachmentproduct/{number}/loading', [ProductController::class,'attachmentproduct'])->name('attachmentproduct');

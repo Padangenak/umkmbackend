@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\ProductAPIController;
 use App\Http\Controllers\Api\UserApiController;
+use App\Http\Controllers\Api\CategoryApiController;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,5 +22,6 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 Route::get('product/get', [ProductAPIController::class, "getProductAll"]);
 Route::get('product/{id}', [ProductAPIController::class, "productId"]);
-Route::get('product/{id}/count', [ProductAPIController::class, "productCount"]);
+Route::post('product/{id}/count', [ProductAPIController::class, "productCount"]);
 Route::get('user/{id}', [UserApiController::class, "userCurrentProduct"]);
+Route::get('category/get', [CategoryApiController::class, "getCategoryAll"]);

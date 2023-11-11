@@ -79,10 +79,10 @@
 								</div>
 							</template>
 						</Column>
-						<Column header="Tipe" class="max-md:hidden">
+						<Column header="Category" class="max-md:hidden">
 							<template #body="slotProps">
 								<div class="flex flex-wrap">
-									{{ typeSplit(slotProps.data.type) }}
+									{{ slotProps.data.category.category }}
 								</div>
 							</template>
 						</Column>
@@ -114,12 +114,8 @@
 						<Column header="Active" class="max-md:hidden">
 							<template #body="slotProps">
 								<div class="card flex justify-content-center max-md:w-36">
-									<SelectButton
-										v-model="slotProps.data.active"
-										:options="options"
-										aria-labelledby="basic"
-										@change="active(slotProps.data.id)"
-									/>
+									{{ slotProps.data.active }}
+									
 								</div>
 							</template>
 						</Column>
@@ -142,19 +138,10 @@
 						<Column header="Delete">
 							<template #body="slotProps">
 								<div>
-									<!-- <pre>{{slotProps.data}}</pre> -->
-									<!-- 									<Link
-										:href="
-											route('editProduct', [
-												slotProps.data.id,
-											])
-										"
-									> -->
 									<Button
 										label="Delete"
 										@click="alertButton(slotProps.data.id)"
 									/>
-									<!-- </Link> -->
 								</div>
 							</template>
 						</Column>

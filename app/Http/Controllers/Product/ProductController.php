@@ -10,6 +10,7 @@ use App\Models\Variant_attachment;
 use App\Models\Product_attachment;
 use App\Models\Variant;
 use App\Models\Product;
+use App\Models\Category;
 use App\Traits\ImageTrait;
 use Inertia\Inertia;
 use Illuminate\Support\Facades\Auth;
@@ -24,6 +25,7 @@ class ProductController extends Controller
                 $variant->with('attachment');
             }
         ])
+        ->with('category')
         ->orderBy('id', 'DESC')
         ->where('user_id', Auth::user()->id)->get();
         // dd($product);
@@ -40,11 +42,14 @@ class ProductController extends Controller
         return Product::orderBy('id', 'DESC')->get();
     }
     public function add(){
-        return Inertia::render('product/add');
+        $category = Category::get();
+        return Inertia::render('product/add', [
+            'categories'=>$category
+        ]);
     }
     public function addLoading(ProductRequest $request){
         $user = Auth::user()->id;
-        // dd($user);
+        // dd($request->type['category']);
         $add = $request->add($user, $request);
         if($add != false){
             return redirect()->route('editProduct', ['id'=>$add->id]);
@@ -78,13 +83,17 @@ class ProductController extends Controller
         return Variant::with('attachment')->find($variantId);
     }
     public function editProduct($id){
+        $category = Category::get();
         // dd($id);
         return Inertia::render('product/edit/index', [
             'product'=>Product::with('attachment')->with([
                 'variant'=>function($variant){
                     $variant->with('attachment');
                 }
-            ])->findOrFail($id)
+            ])
+            ->with('category')
+            ->findOrFail($id),
+            'categories'=>$category
         ]);
     }
     public function imageDelete(Request $request, $id, $variantId){
@@ -132,7 +141,7 @@ class ProductController extends Controller
         $product = Product::find($id);
         Product::find($id)->update([
             'product'=>$request->product != null ? $request->product : $product->product,
-            'type'=>$request->type != null ? $request->type : $product->type,
+            'category_id'=>$request->category != null ? $request->category['id'] : $product->category_id,
             'price'=>$request->price != null ? $request->price : $product->price,
             'discon'=>$request->discon != null ? $request->discon : $product->discon,
             'description'=>$request->description != null ? $request->description : $product->description,
